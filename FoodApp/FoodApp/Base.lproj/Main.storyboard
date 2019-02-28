@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4it-Jg-Qg9">
-                                <rect key="frame" x="20" y="40" width="335" height="112.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4it-Jg-Qg9">
+                                <rect key="frame" x="20" y="40" width="523" height="340.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PkQ-Jg-0h5">
                                         <rect key="frame" x="0.0" y="0.0" width="86.5" height="20.5"/>
@@ -28,22 +28,35 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E4i-V2-9kl">
-                                        <rect key="frame" x="0.0" y="36.5" width="335" height="30"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="523" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEX-1y-JsN">
-                                        <rect key="frame" x="0.0" y="82.5" width="155" height="30"/>
+                                        <rect key="frame" x="0.0" y="90.5" width="155" height="30"/>
                                         <state key="normal" title="Set Default  Label Text"/>
                                         <connections>
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nKO-Nu-CNa"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ikeda" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-nc-yOI">
+                                        <rect key="frame" x="0.0" y="140.5" width="523" height="200"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="2ra-01-8bf"/>
+                                            <constraint firstAttribute="width" secondItem="9VK-nc-yOI" secondAttribute="height" multiplier="335:128" id="74r-uT-z2c"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="0Pl-Fl-BpR" appends="YES" id="ZB0-To-d1z"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9VK-nc-yOI" secondAttribute="trailing" id="0C5-VC-WDl"/>
                                     <constraint firstItem="E4i-V2-9kl" firstAttribute="leading" secondItem="4it-Jg-Qg9" secondAttribute="leading" id="3Im-hG-XoE"/>
                                     <constraint firstAttribute="trailing" secondItem="E4i-V2-9kl" secondAttribute="trailing" id="Hht-rp-ttm"/>
+                                    <constraint firstItem="9VK-nc-yOI" firstAttribute="leading" secondItem="4it-Jg-Qg9" secondAttribute="leading" id="Ulb-dL-Qbq"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -58,10 +71,20 @@
                     <connections>
                         <outlet property="mealNameLabel" destination="PkQ-Jg-0h5" id="4Bf-vN-rwN"/>
                         <outlet property="nameTextField" destination="E4i-V2-9kl" id="3mj-Bs-U8g"/>
+                        <outlet property="photoImageView" destination="9VK-nc-yOI" id="NEz-eh-LjV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0Pl-Fl-BpR">
+                    <connections>
+                        <action selector="selectImagePhotoLibrary:" destination="BYZ-38-t0r" id="h9S-89-3cL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="141.59999999999999" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ikeda" width="650" height="433"/>
+    </resources>
 </document>
