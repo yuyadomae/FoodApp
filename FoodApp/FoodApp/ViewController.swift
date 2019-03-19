@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -19,14 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         nameTextField.delegate = self
-
-//        var monster = Monster(name: "勇者", level: 10)
-//        var slime = Slime(name: "スライム", level: 5)
-//        monster.attackMonster(enemy: slime)
-//        slime.attackMonster(enemy: monster)
-//        slime.escapeFromMonster(enemy: monster)
-        
-
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -44,43 +36,40 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         mealNameLabel.text = "Default Text"
     }
     
-    @IBAction func selectImagePhotoLibrary(_ sender: UITapGestureRecognizer) {
+    @IBAction func selectImagefromPhtoLibrary(_ sender: UITapGestureRecognizer) {
+        // Hide the keyboard.
         nameTextField.resignFirstResponder()
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        present(imagePickerController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+            //イメージピッカーを作成
+            let imagePickerController = UIImagePickerController()
+            
+            //画像の参照元
+            imagePickerController.sourceType = .photoLibrary
+            imagePickerController.delegate = self
+            present(imagePickerController, animated: true, completion: nil)
+            
+        }
     }
-}
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 
-////Monsterクラスの定義
-//class Monster {
-//    var name: String
-//    var level: Int
-//    var hp: Int
-//
-//    init(name: String, level: Int) {
-//        self.name = name
-//        self.level = level
-//        self.hp = 1
-//    }
-//
-//    func attackMonster(enemy: Monster) {
-//        print("\(self.name)は\(enemy.name)を攻撃した。")
-//    }
-//}
-//
-////スライムクラスの定義
-//class Slime: Monster {
-//    func escapeFromMonster(enemy: Monster) {
-//        print("\(self.name)は\(enemy.name)から逃げた。")
-//    }
-//
-//    override func attackMonster(enemy: Monster) {
-//        print("\(self.name)は\(enemy.name)から全てを奪った。")
-//    }
-//}
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        //画像をはめ込む
+        photoImageView.image = selectedImage
+        
+        //pickerを閉じる
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
 
 
 
